@@ -1,5 +1,13 @@
-﻿
-var solver = new Solver();
+﻿using Microsoft.Extensions.Logging;
 
-solver.Solve(1);
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
+        ILogger logger = factory.CreateLogger("Program");
+        var solver = new Solver();
 
+        solver.Solve();
+    }
+}
