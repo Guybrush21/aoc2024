@@ -1,6 +1,5 @@
 public class Solver
 {
-    private int day;
     private List<SolverBase> solvers = new List<SolverBase>();
 
     public Solver()
@@ -14,8 +13,8 @@ public class Solver
         var solver = this.solvers.First(x => x.Day == day);
 
         Console.WriteLine($"Day {day}");
-        Console.WriteLine($"Part 1: {this.solvers[day - 1].Part1()}");
-        Console.WriteLine($"Part 2: {this.solvers[day - 1].Part2()}");
+        Console.WriteLine($"Part 1: {solver.Part1()}");
+        Console.WriteLine($"Part 2: {solver.Part2()}");
     }
 
 }

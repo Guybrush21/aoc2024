@@ -1,12 +1,8 @@
-using Microsoft.Extensions.Logging;
-
 public class Solver2 : SolverBase
 {
-    ILogger<Solver2> logger;
     private List<List<int>> reports = new List<List<int>>();
     public Solver2(int day, string[] input) : base(day, input)
     {
-        logger = new Logger<Solver2>();
         foreach (var line in input)
         {
             var report = new List<int>();
