@@ -1,20 +1,23 @@
+using Microsoft.Extensions.Logging;
+
 public class Solver
 {
     private List<SolverBase> solvers = new List<SolverBase>();
-
-    public Solver()
+    private ILogger logger;
+    public Solver(ILogger logger)
     {
-        this.solvers.Add(new Solver1(1, File.ReadAllLines($"./input/{1}")));
-        this.solvers.Add(new Solver2(2, File.ReadAllLines($"./input/{2}")));
+        this.logger = logger;
+        this.solvers.Add(new Solver1(1, File.ReadAllLines($"./input/{1}"), logger));
+        this.solvers.Add(new Solver2(2, File.ReadAllLines($"./input/{2}"), logger));
     }
 
     public void Solve(int day = 2)
     {
         var solver = this.solvers.First(x => x.Day == day);
 
-        Console.WriteLine($"Day {day}");
-        Console.WriteLine($"Part 1: {solver.Part1()}");
-        Console.WriteLine($"Part 2: {solver.Part2()}");
+        logger.LogInformation($"Solution for day {day}");
+        logger.LogInformation($"Part 1: {solver.Part1()}");
+        logger.LogInformation($"Part 2: {solver.Part2()}");
     }
 
 }

@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Logging;
+
 public class Solver2 : SolverBase
 {
     private List<List<int>> reports = new List<List<int>>();
-    public Solver2(int day, string[] input) : base(day, input)
+    public Solver2(int day, string[] input, ILogger logger) : base(day, input, logger)
     {
         foreach (var line in input)
         {
@@ -14,19 +16,25 @@ public class Solver2 : SolverBase
         }
     }
 
-    public override string Part1()
+      public override string Part1()
     {
         var validReports = 0;
         foreach (var line in reports)
         {
+            this.logger.LogDebug($"Checking line {String.Join(' ', line.Select(x => x.ToString()))}");
+
             if (line.First() > line.Last())
                 if (this.checkDecreasing(line))
                 {
-
+                    this.logger.LogDebug("Line is safe for decreasing");
                     validReports++;
-                };
+                }
             if (line.First() < line.Last())
-                if (this.checkIncreasing(line)) validReports++;
+                if (this.checkIncreasing(line))
+                {
+                    this.logger.LogDebug($"Line is safe for increasing");
+                    validReports++;
+                }
         }
         return validReports.ToString();
     }

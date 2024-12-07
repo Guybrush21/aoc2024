@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Logging;
+
 public class Solver1 : SolverBase
 {
 
-    public Solver1(int day, string[] input) : base(day, input)
+    public Solver1(int day, string[] input, ILogger logger) : base(day, input, logger)
     {
     }
 
@@ -46,7 +48,7 @@ public class Solver1 : SolverBase
         var distanceSum = 0;
         for (var i = 0; i < left.Count; i++)
         {
-            Console.WriteLine(distanceSum);
+            this.logger.LogDebug($"distanceSum is {distanceSum}");
             distanceSum += int.Abs(left[i] - right[i]);
         }
         return distanceSum.ToString();

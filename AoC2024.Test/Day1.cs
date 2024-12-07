@@ -1,8 +1,15 @@
-namespace AoC2024.Test;
+using Microsoft.Extensions.Logging;
 
+namespace AoC2024.Test;
 
 public class Day1
 {
+    private ILogger logger;
+    public Day1()
+    {
+        ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(LogLevel.Debug));
+        this.logger = factory.CreateLogger("Test AOC2024");
+    }
     [Fact]
     public void Part1()
     {
@@ -13,7 +20,7 @@ public class Day1
   3   9
   3   3";
 
-        var solver = new Solver1(1, input.Split(Environment.NewLine));
+        var solver = new Solver1(1, input.Split(Environment.NewLine), logger);
 
         Assert.Equal("11", solver.Part1());
     }
